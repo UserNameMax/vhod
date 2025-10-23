@@ -1,130 +1,231 @@
+/* БАЗА */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
+:root {
+    --header-h: 72px;
+    /* высота фиксированного хедера */
+    --backdrop: rgba(0, 0, 0, .45);
+    /* затемнение для читаемости на фото */
 }
 
-header {
-    background-color: #1a1a1a;
-    padding: 20px 0;
-    color: white;
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #f2f2f2;
+
+    /* Фоновая фотография, которая остаётся статичной при скролле */
+    /* Замените URL ниже на вашу картинку: например images/bg.jpg */
+    background-image: url("images/hokan_logo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    /* делает фон «неподвижным» */
+}
+
+/* Полупрозрачная вуаль для контраста текста с фоном */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    z-index: -1;
+}
+
+/* КОНТЕЙНЕР */
+.container {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+/* ФИКСИРОВАННЫЙ ХЕДДЕР */
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    padding: 12px 0 16px;
     text-align: center;
 }
 
-header h1 {
-    font-size: 2.5em;
+.header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    color: #fff;
+}
+
+/* НАВИГАЦИЯ — теперь под заголовком */
+.nav {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 999px;
+    color: #fff;
+    text-decoration: none;
+    background: rgba(255, 255, 255, .15);
+    transition: transform .15s ease, background-color .2s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, .25);
+}
+
+/* Теперь увеличим отступ, чтобы контент не попадал под двойной хеддер */
+:root {
+    --header-h: 110px;
 }
 
 main {
-    padding: 40px 20px;
+    padding-top: calc(var(--header-h) + 30px);
 }
 
+
+/* ОТСТУП ВВЕРХУ, ЧТОБЫ КОНТЕНТ НЕ ЗАЕЗЖАЛ ПОД ФИКС. ХЕДДЕР */
+main {
+    padding-top: calc(var(--header-h) + 20px);
+}
+
+/* СЕКЦИИ */
+.menu-section {
+    padding: 50px 0;
+    /* чтобы якорь прокручивался точно под хеддер */
+    scroll-margin-top: calc(var(--header-h) + 12px);
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.25) 0%,
+            rgba(0, 0, 0, 0.20) 40%,
+            rgba(0, 0, 0, 0.25) 100%);
+    border-top: 1px solid rgba(255, 255, 255, .06);
+    border-bottom: 1px solid rgba(255, 255, 255, .06);
+}
+
+.section-title {
+    font-size: 1.8rem;
+    margin-bottom: 22px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+
+/* СЕТКА КАРТОЧЕК */
 .menu {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
 }
 
 .menu-item {
-    background-color: white;
-    border-radius: 10px;
+    background: rgba(255, 255, 255, .06);
+    color: #f2f2f2;
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .25);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
 }
 
 .menu-item:hover {
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .35);
+    background: rgba(255, 255, 255, .08);
 }
 
 .menu-item-img img {
     width: 100%;
     height: 200px;
     object-fit: cover;
+    display: block;
 }
 
 .menu-item-info {
-    padding: 20px;
+    padding: 16px;
 }
 
 .menu-item-title {
-    font-size: 1.6em;
-    margin-bottom: 10px;
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: #fff;
 }
 
 .menu-item-description {
-    font-size: 1em;
-    color: #666;
-    margin-bottom: 15px;
+    font-size: .95rem;
+    color: #e3e3e3;
+    opacity: .9;
+    margin-bottom: 10px;
 }
 
 .menu-item-price {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
 }
 
-footer {
-    background-color: #1a1a1a;
-    color: white;
-    padding: 20px;
+/* ФУТЕР */
+.site-footer {
+    border-top: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(20, 20, 20, .7);
+    backdrop-filter: blur(4px);
+    color: #ddd;
     text-align: center;
-    margin-top: 40px;
+    padding: 18px 0 24px;
 }
 
-footer p {
-    font-size: 1em;
-}
-
-/* Медиа-запрос для мобильных устройств */
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
 @media (max-width: 768px) {
-    /* Для мобильных экранов карточки должны идти вертикально */
-    .menu {
-        display: block;
+    :root {
+        --header-h: 64px;
     }
 
-    .menu-item {
-        margin-bottom: 20px; /* Отступ между карточками */
+    .logo {
+        font-size: 1rem;
+    }
+
+    .nav-link {
+        padding: 8px 12px;
     }
 
     .menu-item-img img {
-        height: 250px; /* Немного увеличим высоту изображения для лучшего отображения */
-    }
-
-    header h1 {
-        font-size: 2em; /* Уменьшаем размер шрифта на мобильных */
-    }
-
-    .menu-item-title {
-        font-size: 1.4em;
-    }
-
-    .menu-item-price {
-        font-size: 1.1em;
+        height: 220px;
     }
 }
 
-/* Медиа-запрос для очень маленьких экранов (например, телефоны в портретном режиме) */
 @media (max-width: 480px) {
-    header h1 {
-        font-size: 1.8em;
+    :root {
+        --header-h: 60px;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
     }
 
     .menu-item-title {
-        font-size: 1.3em;
+        font-size: 1.05rem;
     }
 
     .menu-item-description {
-        font-size: 0.9em;
-    }
-
-    .menu-item-price {
-        font-size: 1em;
+        font-size: .9rem;
     }
 }
