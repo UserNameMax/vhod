@@ -1,4 +1,3 @@
-/* БАЗА */
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +6,7 @@
 
 :root {
     --header-h: 72px;
-    /* высота фиксированного хедера */
     --backdrop: rgba(0, 0, 0, .45);
-    /* затемнение для читаемости на фото */
 }
 
 html {
@@ -20,16 +17,12 @@ body {
     font-family: Arial, sans-serif;
     color: #f2f2f2;
 
-    /* Фоновая фотография, которая остаётся статичной при скролле */
-    /* Замените URL ниже на вашу картинку: например images/bg.jpg */
     background-image: url("images/hokan_logo.png");
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    /* делает фон «неподвижным» */
 }
 
-/* Полупрозрачная вуаль для контраста текста с фоном */
 body::before {
     content: "";
     position: fixed;
@@ -38,13 +31,11 @@ body::before {
     z-index: -1;
 }
 
-/* КОНТЕЙНЕР */
 .container {
     width: min(1200px, 92%);
     margin: 0 auto;
 }
 
-/* ФИКСИРОВАННЫЙ ХЕДДЕР */
 .site-header {
     position: fixed;
     top: 0;
@@ -73,8 +64,7 @@ body::before {
     color: #fff;
 }
 
-/* НАВИГАЦИЯ — теперь под заголовком */
-.nav {
+=.nav {
     display: flex;
     justify-content: center;
     gap: 14px;
@@ -95,8 +85,7 @@ body::before {
     background: rgba(255, 255, 255, .25);
 }
 
-/* Теперь увеличим отступ, чтобы контент не попадал под двойной хеддер */
-:root {
+=:root {
     --header-h: 110px;
 }
 
@@ -105,15 +94,12 @@ main {
 }
 
 
-/* ОТСТУП ВВЕРХУ, ЧТОБЫ КОНТЕНТ НЕ ЗАЕЗЖАЛ ПОД ФИКС. ХЕДДЕР */
 main {
     padding-top: calc(var(--header-h) + 20px);
 }
 
-/* СЕКЦИИ */
 .menu-section {
     padding: 50px 0;
-    /* чтобы якорь прокручивался точно под хеддер */
     scroll-margin-top: calc(var(--header-h) + 12px);
     background: linear-gradient(to bottom,
             rgba(0, 0, 0, 0.25) 0%,
@@ -130,7 +116,6 @@ main {
     text-shadow: 0 1px 2px rgba(0, 0, 0, .35);
 }
 
-/* СЕТКА КАРТОЧЕК */
 .menu {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -183,7 +168,6 @@ main {
     color: #fff;
 }
 
-/* ФУТЕР */
 .site-footer {
     border-top: 1px solid rgba(255, 255, 255, .08);
     background: rgba(20, 20, 20, .7);
@@ -193,7 +177,6 @@ main {
     padding: 18px 0 24px;
 }
 
-/* МОБИЛЬНАЯ АДАПТАЦИЯ */
 @media (max-width: 768px) {
     :root {
         --header-h: 64px;
